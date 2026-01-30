@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 
-def render_plot(csv_file='mqsoW.csv'):
+def render_plot(csv_file='GINIUSA.csv'):
     """
     Docstring for render_plot
 
