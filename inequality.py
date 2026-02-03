@@ -22,11 +22,25 @@ def render_plot(csv_file='GINIUSA.csv'):
 
     plt.plot(x,y)
     plt.ylim(bottom=0)
+    plt.title('GINI Coefficient 1963-2023')
+    
+    # Label once per N years (adjust interval as needed)
+    label_interval = 5  # Change to 10 for every 10 years
+    for i in range(len(x)):
+        year = x.iloc[i].year
+        if year % label_interval == 0:  # Label years divisible by interval
+            plt.annotate(f'{y.iloc[i]:.1f}', xy=(x.iloc[i], y.iloc[i]),
+                     xytext=(0, 5), textcoords='offset points',
+                     ha='center', fontsize=8)
+            
+    plt.gca().spines['top'].set_visible(False)
+    plt.gca().spines['right'].set_visible(False)
+    plt.gca().spines['left'].set_visible(False)
+    plt.gca().spines['bottom'].set_visible(False)
+
+    # Remove y axis scale completely
+    plt.yticks([])
     plt.tight_layout()
-    # for i in range(len(x)):
-    #     plt.annotate(str(int(y.iloc[i])), xy=(x.iloc[i], y.iloc[i]), 
-    #              xytext=(0, 5), textcoords='offset points', 
-    #              ha='center', fontsize=9)
     plt.show()
     
 
