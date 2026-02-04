@@ -20,12 +20,13 @@ def render_plot(csv_file='GINIUSA.csv'):
     x = gini_frame['observation_date']
     y = gini_frame['SIPOVGINIUSA']
 
+    plt.figure(num="GINI Coefficient")
     plt.plot(x,y)
-    plt.ylim(bottom=0)
+    plt.ylim(bottom=0,top=y.max()*1.15)
     plt.title('GINI Coefficient 1963-2023')
     
     # Label once per N years (adjust interval as needed)
-    label_interval = 5  # Change to 10 for every 10 years
+    label_interval = 10  # Change to 10 for every 10 years
     for i in range(len(x)):
         year = x.iloc[i].year
         if year % label_interval == 0:  # Label years divisible by interval
@@ -40,7 +41,8 @@ def render_plot(csv_file='GINIUSA.csv'):
 
     # Remove y axis scale completely
     plt.yticks([])
-    plt.tight_layout()
+    # plt.xticks([])
+    plt.tight_layout(pad=1.5)
     plt.show()
     
 
