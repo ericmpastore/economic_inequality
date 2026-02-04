@@ -41,11 +41,8 @@ def render_plot(csv_file='GINIUSA.csv'):
 
     # Remove y axis scale completely
     plt.yticks([])
-    # plt.xticks([])
     plt.tight_layout(pad=1.5)
     plt.show()
-    
-
 
 def main():
     render_plot()
