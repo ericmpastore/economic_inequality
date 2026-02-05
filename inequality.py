@@ -2,6 +2,19 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
+from fredapi import Fred
+
+def get_data():
+
+    fred = Fred(api_key='d924e2e442ebd00887e0ad5687fdd531')
+
+    gini_data = fred.get_series('SIPOVGINIUSA')
+    gini_frame = gini_data.reset_index()
+    gini_frame.columns = ['observation_date', 'SIPOVGINIUSA']
+
+    gini_frame.to_csv('GINIUSA.csv', index=False)
+
+    return gini_frame
 
 def render_plot(csv_file='GINIUSA.csv'):
     """
@@ -12,7 +25,8 @@ def render_plot(csv_file='GINIUSA.csv'):
     :param csv_file: Parameter identifies file to read source data
     """
     # read csv parameter into dataframe, EPastore 01/30/26
-    gini_frame = pd.read_csv(csv_file)
+    # gini_frame = pd.read_csv(csv_file)
+    gini_frame = get_data()
 
     # convert dates to full dates, EPastore 01/31/26
     gini_frame['observation_date'] = pd.to_datetime(gini_frame['observation_date'])
